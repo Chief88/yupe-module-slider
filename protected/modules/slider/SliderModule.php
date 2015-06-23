@@ -62,8 +62,8 @@ class SliderModule extends WebModule
             'minSize'           => Yii::t($this->aliasModule, 'Minimum size (in bytes)'),
             'maxSize'           => Yii::t($this->aliasModule, 'Maximum size (in bytes)'),
             'mimeTypes'         => Yii::t($this->aliasModule, 'Mime types'),
-            'maxWidth' => Yii::t($this->aliasModule, 'maxWidth'),
-            'maxHeight' => Yii::t($this->aliasModule, 'maxHeight'),
+        	'maxWidth'          => Yii::t($this->aliasModule, 'maxWidth'),
+        	'maxHeight'         => Yii::t($this->aliasModule, 'maxHeight'),
         );
     }
 
@@ -75,8 +75,8 @@ class SliderModule extends WebModule
             'minSize',
             'maxSize',
             'mimeTypes',
-            'maxWidth',
-            'maxHeight',
+        	'maxWidth',
+        	'maxHeight',
 
         );
     }
@@ -92,8 +92,8 @@ class SliderModule extends WebModule
                     'minSize',
                     'maxSize',
                     'uploadPath',
-                    'maxWidth',
-                    'maxHeight'
+                	'maxWidth',
+                	'maxHeight'
                 )
             )
         );
@@ -109,18 +109,18 @@ class SliderModule extends WebModule
             $messages[WebModule::CHECK_ERROR][] = array(
                 'type'    => WebModule::CHECK_ERROR,
                 'message' => Yii::t(
-                    $this->aliasModule,
-                    'Please, choose catalog for slides! {link}',
-                    array(
-                        '{link}' => CHtml::link(
-                            Yii::t($this->aliasModule, 'Change module settings'),
-                            array(
-                                '/yupe/backend/modulesettings/',
-                                'module' => $this->id,
-                            )
-                        ),
-                    )
-                ),
+                        $this->aliasModule,
+                        'Please, choose catalog for slides! {link}',
+                        array(
+                            '{link}' => CHtml::link(
+                                    Yii::t($this->aliasModule, 'Change module settings'),
+                                    array(
+                                        '/yupe/backend/modulesettings/',
+                                        'module' => $this->id,
+                                    )
+                                ),
+                        )
+                    ),
             );
         }
 
@@ -128,19 +128,19 @@ class SliderModule extends WebModule
             $messages[WebModule::CHECK_ERROR][] = array(
                 'type'    => WebModule::CHECK_ERROR,
                 'message' => Yii::t(
-                    $this->aliasModule,
-                    'Directory "{dir}" is not accessible for writing ot not exists! {link}',
-                    array(
-                        '{dir}'  => $uploadPath,
-                        '{link}' => CHtml::link(
-                            Yii::t($this->aliasModule, 'Change module settings'),
-                            array(
-                                '/yupe/backend/modulesettings/',
-                                'module' => $this->id,
-                            )
-                        ),
-                    )
-                ),
+                        $this->aliasModule,
+                        'Directory "{dir}" is not accessible for writing ot not exists! {link}',
+                        array(
+                            '{dir}'  => $uploadPath,
+                            '{link}' => CHtml::link(
+                                    Yii::t($this->aliasModule, 'Change module settings'),
+                                    array(
+                                        '/yupe/backend/modulesettings/',
+                                        'module' => $this->id,
+                                    )
+                                ),
+                        )
+                    ),
             );
         }
 
@@ -148,18 +148,18 @@ class SliderModule extends WebModule
             $messages[WebModule::CHECK_ERROR][] = array(
                 'type'    => WebModule::CHECK_ERROR,
                 'message' => Yii::t(
-                    $this->aliasModule,
-                    'Set maximum slides size {link}',
-                    array(
-                        '{link}' => CHtml::link(
-                            Yii::t($this->aliasModule, 'Change module settings'),
-                            array(
-                                '/yupe/backend/modulesettings/',
-                                'module' => $this->id,
-                            )
-                        ),
-                    )
-                ),
+                        $this->aliasModule,
+                        'Set maximum slides size {link}',
+                        array(
+                            '{link}' => CHtml::link(
+                                    Yii::t($this->aliasModule, 'Change module settings'),
+                                    array(
+                                        '/yupe/backend/modulesettings/',
+                                        'module' => $this->id,
+                                    )
+                                ),
+                        )
+                    ),
             );
         }
 
@@ -225,11 +225,6 @@ class SliderModule extends WebModule
                 'icon'  => 'fa fa-fw fa-plus-square',
                 'label' => Yii::t($this->aliasModule, 'Add slider'),
                 'url'   => array('/slider/sliderBackend/create')
-            ),
-            array(
-                'icon'  => 'fa fa-fw fa-folder-open',
-                'label' => Yii::t($this->aliasModule, 'Slider categories'),
-                'url'   => array('/category/categoryBackend/index', 'Category[parent_id]' => (int)$this->mainCategory)
             ),
         );
     }
