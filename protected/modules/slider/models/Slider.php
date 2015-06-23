@@ -75,7 +75,7 @@ class Slider extends yupe\models\YModel
 
     public function afterDelete()
     {
-        foreach ($this->slides as $slide) {
+            foreach ($this->slides as $slide) {
             $slide->delete();
         }
 
@@ -94,7 +94,7 @@ class Slider extends yupe\models\YModel
                 'slides'    => array(self::HAS_MANY, 'Slide', 'slider_id'),
                 'user'     => array(self::BELONGS_TO, 'User', 'user_id'),
             ),
-            array()
+			array()
         );
     }
 
@@ -135,9 +135,9 @@ class Slider extends yupe\models\YModel
 
 
         return new CActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria,
-            'sort'     => array('defaultOrder' => 't.id')
-        ));
+        		'criteria' => $criteria,
+        		'sort'     => array('defaultOrder' => 't.id')
+        		));
     }
 
     public function beforeValidate()
@@ -165,6 +165,7 @@ class Slider extends yupe\models\YModel
         return isset($data[$this->status]) ? $data[$this->status] : Yii::t($this->_aliasModule, '*unknown*');
     }
 
+
     /**
      * Проверка на возможность редактировать/удалять изображения
      *
@@ -174,6 +175,10 @@ class Slider extends yupe\models\YModel
     {
         return Yii::app()->user->isSuperUser() || Yii::app()->user->getId() == $this->user_id;
     }
+
+
+
+
 
     /**
      * Получаем имя того, кто создал слайдер:

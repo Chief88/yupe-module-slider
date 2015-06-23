@@ -19,11 +19,11 @@ class m000000_000000_slider_base extends yupe\components\DbMigration
                 'name'          => 'varchar(250) NOT NULL',
                 'description'   => 'text',
                 'file'          => 'varchar(250) NOT NULL',
-                'url'           => 'varchar(250) NOT NULL',
+            	'url'           => 'varchar(250) NOT NULL',
                 'creation_date' => 'datetime NOT NULL',
                 'user_id'       => 'integer DEFAULT NULL',
                 'status'        => "integer NOT NULL DEFAULT '1'",
-                'sort'			=> 	"integer NOT NULL DEFAULT '1'",
+            	'sort'			=> 	"integer NOT NULL DEFAULT '1'",
                 'slider_id'     => 'int(11) NOT NULL',
             ),
             $this->getOptions()

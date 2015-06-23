@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs = array(
     Yii::t($this->aliasModule, 'Slider') => array($this->patchBackend .'index'),
-    $model->name                          => array($this->patchBackend .'view', 'id' => $model->id),
+    $model->name,
     Yii::t($this->aliasModule, 'Edit'),
 );
 
@@ -28,14 +28,6 @@ $this->menu = array(
         )
     ),
     array(
-        'icon'  => 'fa fa-fw fa-eye',
-        'label' => Yii::t($this->aliasModule, 'View slider'),
-        'url'   => array(
-            $this->patchBackend .'view',
-            'id' => $model->id
-        )
-    ),
-    array(
         'icon'        => 'fa fa-fw fa-trash-o',
         'label'       => Yii::t($this->aliasModule, 'Remove slider'),
         'url'         => '#',
@@ -49,7 +41,7 @@ $this->menu = array(
 );
 ?>
 <div class="page-header">
-    <h1><?php echo Yii::t($this->aliasModule, 'Change slider'); ?><br/>
+    <h1><?php echo Yii::t($this->aliasModule, 'Edition slider'); ?><br/>
         <small>&laquo;<?php echo $model->name; ?>&raquo;</small>
     </h1>
 </div>

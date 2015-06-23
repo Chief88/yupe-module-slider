@@ -38,17 +38,17 @@ $form = $this->beginWidget(
 <div class='row'>
     <div class="col-sm-7">
 
-        <div class='row'>
-            <div class="col-sm-12">
-                <?php echo $form->textFieldGroup($model, 'name'); ?>
-            </div>
-        </div>
+		<div class='row'>
+		    <div class="col-sm-12">
+		        <?php echo $form->textFieldGroup($model, 'name'); ?>
+		    </div>
+		</div>
 
-        <div class='row'>
-            <div class="col-sm-12">
+		<div class='row'>
+		    <div class="col-sm-12">
                 <?php echo $form->slugFieldGroup($model, 'code', ['sourceAttribute' => 'name']); ?>
-            </div>
-        </div>
+		    </div>
+		</div>
 
         <div class="row">
             <div class="col-sm-12 <?php echo $model->hasErrors('description') ? 'has-error' : ''; ?>">
@@ -56,20 +56,20 @@ $form = $this->beginWidget(
             </div>
         </div>
 
-        <div class='row'>
-            <div class='col-sm-8'>
-                <?php echo $form->dropDownListGroup(
-                    $model,
-                    'status',
-                    array(
-                        'widgetOptions' => array(
-                            'data' => $model->getStatusList(),
-                        ),
-                    )
-                ); ?>
-            </div>
+		<div class='row'>
+		    <div class='col-sm-8'>
+		        <?php echo $form->dropDownListGroup(
+		            $model,
+		            'status',
+		            array(
+		                'widgetOptions' => array(
+		                    'data' => $model->getStatusList(),
+		                ),
+		            )
+		        ); ?>
+		    </div>
 
-        </div>
+		</div>
 
     </div>
 
@@ -82,9 +82,9 @@ $this->widget(
         'buttonType' => 'submit',
         'context'    => 'primary',
         'label'      => $model->isNewRecord ? Yii::t($aliasModule, 'Add slide and close') : Yii::t(
-            $aliasModule,
-            'Save slide and continue'
-        ),
+                $aliasModule,
+                'Save slide and continue'
+            ),
     )
 ); ?>
 
@@ -95,9 +95,9 @@ $this->widget(
         'buttonType'  => 'submit',
         'htmlOptions' => array('name' => 'submit-type', 'value' => 'index'),
         'label'       => $model->isNewRecord ? Yii::t($aliasModule, 'Add slide and save') : Yii::t(
-            $aliasModule,
-            'Save mage and close'
-        ),
+                $aliasModule,
+                'Save mage and close'
+            ),
     )
 ); ?>
 

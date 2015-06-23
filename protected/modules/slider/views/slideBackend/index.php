@@ -61,10 +61,10 @@ $this->widget(
     'yupe\widgets\CustomGridView',
     array(
         'id'           => 'slide-grid',
-        'sortableRows'      => true,
-        'sortableAjaxSave'  => true,
-        'sortableAttribute' => 'sort',
-        'sortableAction'    => $this->patchBackend .'sortable',
+    		'sortableRows'      => true,
+    		'sortableAjaxSave'  => true,
+    		'sortableAttribute' => 'sort',
+    		'sortableAction'    => $this->patchBackend .'sortable',
         'dataProvider' => $model->search(),
         'filter'       => $model,
         'columns'      => array(
@@ -86,19 +86,19 @@ $this->widget(
             ),
             'name',
             array(
-                'class'   => 'yupe\widgets\EditableStatusColumn',
-                'name'    => 'status',
-                'url'     => $this->createUrl($this->patchBackend .'inline'),
-                'source'  => $model->getStatusList(),
-                'options' => [
+                    'class'   => 'yupe\widgets\EditableStatusColumn',
+                    'name'    => 'status',
+                    'url'     => $this->createUrl($this->patchBackend .'inline'),
+                    'source'  => $model->getStatusList(),
+                    'options' => [
                     Slide::STATUS_SHOW  => ['class' => 'label-success'],
                     Slide::STATUS_HIDE => ['class' => 'label-danger'],
 
-                ],
+                    ],
             ),
             array(
                 'class' => 'yupe\widgets\CustomButtonColumn',
-                'template'=>'{update}{delete}'
+            		'template'=>'{update}{delete}'
             ),
         ),
     )

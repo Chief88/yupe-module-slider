@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Slide основная модель для работы с изображениями
+ *
+ * @author Valek Vergilyush <v.vergilyush@gmail.com>
+ * @link http://green-s.pro
+ * @copyright 2010-2014 green-s.pro
+ * @package yupe.modules.slide.models
+ * @since 0.1
+ *
+ */
+
+/**
  * Class Slide
  */
 class Slide extends yupe\models\YModel
@@ -54,7 +65,7 @@ class Slide extends yupe\models\YModel
     {
         $module = Yii::app()->getModule('slider');
 
-        return array(
+        return [
             'imageUpload' => [
                 'class'         => 'yupe\components\behaviors\ImageUploadBehavior',
                 'attributeName' => 'file',
@@ -76,14 +87,12 @@ class Slide extends yupe\models\YModel
                 'attributeName' => 'sort'
             ]
 
-        );
+        ];
     }
 
     public function afterDelete()
     {
         @unlink(Yii::app()->getModule('slider')->getUploadPath() . '/' . $this->file);
-
-
 
         return parent::afterDelete();
     }
@@ -101,7 +110,7 @@ class Slide extends yupe\models\YModel
                 'user'    => array(self::BELONGS_TO, 'User', 'user_id'),
                 'slider'  => array(self::BELONGS_TO, 'Slider', 'slider_id'),
             ),
-            array()
+			array()
         );
     }
 
@@ -115,7 +124,7 @@ class Slide extends yupe\models\YModel
             'name'          => Yii::t($this->_aliasModule, 'Title'),
             'description'   => Yii::t($this->_aliasModule, 'Description'),
             'file'          => Yii::t($this->_aliasModule, 'File'),
-            'url'        	=> Yii::t($this->_aliasModule, 'Url'),
+        	'url'        	=> Yii::t($this->_aliasModule, 'Url'),
             'creation_date' => Yii::t($this->_aliasModule, 'Created at'),
             'user_id'       => Yii::t($this->_aliasModule, 'Creator'),
             'status'        => Yii::t($this->_aliasModule, 'Status'),
@@ -145,10 +154,10 @@ class Slide extends yupe\models\YModel
         $criteria->compare('t.slider_id', $this->slider_id);
 
 
-        return new CActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria,
-            'sort'     => array('defaultOrder' => 't.sort')
-        ));
+        return new CActiveDataProvider(get_class($this), [
+        		'criteria' => $criteria,
+        		'sort'     => ['defaultOrder' => 't.sort']
+        		]);
     }
 
     public function beforeValidate()
