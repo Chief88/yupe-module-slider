@@ -8,7 +8,7 @@ class SlideBackendController extends yupe\components\controllers\BackController
 
     public $aliasModule = 'SliderModule.slider';
     public $patchBackend = '/slider/slideBackend/';
-
+    
     public function accessRules()
     {
         return array(
@@ -33,11 +33,11 @@ class SlideBackendController extends yupe\components\controllers\BackController
             'AjaxImageChoose' => array(
                 'class' => 'yupe\components\actions\YAjaxImageChooseAction'
             ),
-            'inline' => array(
-                'class'           => 'yupe\components\actions\YInLineEditAction',
-                'model'           => 'Slide',
-                'validAttributes' => array('status')
-            ),
+        	'inline' => array(
+        		'class'           => 'yupe\components\actions\YInLineEditAction',
+        		'model'           => 'Slide',
+        		'validAttributes' => array('status')
+        	),
             'sortable' => [
                 'class' => 'yupe\components\actions\SortAction',
                 'model' => 'Slide',
