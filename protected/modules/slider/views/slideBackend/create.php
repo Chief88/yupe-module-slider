@@ -1,33 +1,33 @@
 <?php
-$this->breadcrumbs = array(
-    Yii::t($this->aliasModule, 'Slides') => array($this->patchBackend .'index'),
+$this->breadcrumbs = [
+    Yii::t($this->aliasModule, 'Slides') => [$this->patchBackend .'index'],
     Yii::t($this->aliasModule, 'Add'),
-);
+];
 
 $this->pageTitle = Yii::t($this->aliasModule, 'Slides - add');
 
-$this->menu = array(
-    array(
+$this->menu = [
+    [
         'icon'  => 'fa fa-fw fa-list-alt',
         'label' => Yii::t($this->aliasModule, 'Slide management'),
-        'url'   => array($this->patchBackend .'index')
-    ),
-    array(
+        'url'   => [$this->patchBackend .'index']
+    ],
+    [
         'icon'  => 'fa fa-fw fa-plus-square',
         'label' => Yii::t($this->aliasModule, 'Add slide'),
-        'url'   => array($this->patchBackend .'create')
-    ),
-);
+        'url'   => [$this->patchBackend .'create']
+    ],
+];
 ?>
 <div class="page-header">
     <h1>
-        <?php echo Yii::t($this->aliasModule, 'Slides'); ?>
-        <small><?php echo Yii::t($this->aliasModule, 'add'); ?></small>
+        <?= Yii::t($this->aliasModule, 'Slides'); ?>
+        <small><?= Yii::t($this->aliasModule, 'add'); ?></small>
     </h1>
 </div>
 
-<?php echo $this->renderPartial('_form', array(
+<?= $this->renderPartial('_form', [
         'model' => $model,
         'aliasModule' => $this->aliasModule,
-    )
+    ]
 ); ?>

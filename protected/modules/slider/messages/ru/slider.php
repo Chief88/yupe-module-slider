@@ -16,7 +16,7 @@
  *
  * NOTE, this file must be saved in UTF-8 encoding.
  */
-return array(
+return [
     'Slides categories'                                                     => 'Категории слайдов',
     'General module settings'                                               => 'Основные настройки модуля',
     'Link'                                                                  => 'Ссылка',
@@ -114,4 +114,6 @@ return array(
     'Edit slider'			                                                => 'Редактировать слайдер',
     'Remove slider'			                                                => 'Удалить слайдер',
     'Edition slider'			                                            => 'Редактирование слайдера',
-);
+    'Module for slider management'			                                => 'Модуль для управления слайдерами',
+    'Sergey Latyshkov'			                                            => 'Сергей Латышков',
+];

@@ -13,99 +13,92 @@ $form = $this->beginWidget(
     )
 ); ?>
 <div class="alert alert-info">
-    <?php echo Yii::t($aliasModule, 'Fields with'); ?>
+    <?= Yii::t($aliasModule, 'Fields with'); ?>
     <span class="required">*</span>
-    <?php echo Yii::t($aliasModule, 'are required.'); ?>
+    <?= Yii::t($aliasModule, 'are required.'); ?>
 </div>
 
-<?php echo $form->errorSummary($model); ?>
+<?= $form->errorSummary($model); ?>
+
+<div class="row">
+    <div class="col-sm-7">
+        <?= $form->dropDownListGroup(
+            $model,
+            'slider_id',
+            [
+                'widgetOptions' => [
+                    'data'        => Slider::model()->getListSlider(),
+                    'htmlOptions' => [
+                        'empty'  => '--Выбрать--',
+                        'encode' => false
+                    ],
+                ],
+            ]
+        ); ?>
+    </div>
+</div>
 
 <div class='row'>
     <div class="col-sm-7">
+        <?php
+        echo CHtml::image(
+            !$model->isNewRecord && $model->file ? $model->getImageUrl() : '#',
+            $model->name,
+            [
+                'class' => 'preview-image',
+                'style' => !$model->isNewRecord && $model->file ? 'max-width: 100%;' : 'display:none; max-width: 100%;'
+            ]
+        ); ?>
 
-        <div class="row">
-            <div class="col-sm-7">
-                <?php echo $form->dropDownListGroup(
-                    $model,
-                    'slider_id',
-                    array(
-                        'widgetOptions' => array(
-                            'data'        => Slider::model()->getListSlider(),
-                            'htmlOptions' => array(
-                                'empty'  => '--Выбрать--',
-                                'encode' => false
-                            ),
-                        ),
-                    )
-                ); ?>
-            </div>
-        </div>
-
-        <div class='row'>
-            <div class="col-sm-7">
-                <?php
-                echo CHtml::image(
-                    !$model->isNewRecord && $model->file ? $model->getImageUrl() : '#',
-                    $model->name,
-                    [
-                        'class' => 'preview-image',
-                        'style' => !$model->isNewRecord && $model->file ? '' : 'display:none'
+        <?= $form->fileFieldGroup($model, 'file', [
+                'widgetOptions' => [
+                    'htmlOptions' => [
+                        'onchange' => 'readURL(this);',
+                        'style'    => 'background-color: inherit;'
                     ]
-                ); ?>
+                ]
+            ]
+        ); ?>
+    </div>
+</div>
 
-                <?php echo $form->fileFieldGroup($model, 'file', [
-                        'widgetOptions' => [
-                            'htmlOptions' => [
-                                'onchange' => 'readURL(this);',
-                                'style'    => 'background-color: inherit;'
-                            ]
-                        ]
-                    ]
-                ); ?>
-            </div>
-        </div>
+<div class='row'>
+    <div class="col-sm-7">
+        <?= $form->textFieldGroup($model, 'name'); ?>
+    </div>
+</div>
 
-		<div class='row'>
-		    <div class="col-sm-12">
-		        <?php echo $form->textFieldGroup($model, 'name'); ?>
-		    </div>
-		</div>
+<div class="row">
+    <div class="col-sm-7 <?= $model->hasErrors('description') ? 'has-error' : ''; ?>">
+        <?= $form->labelEx($model, 'description'); ?>
+        <?php $this->widget(
+            $this->module->getVisualEditor(),
+            [
+                'model'     => $model,
+                'attribute' => 'description',
+            ]
+        ); ?>
+        <?= $form->error($model, 'description'); ?>
+    </div>
+</div>
 
-        <div class="row">
-            <div class="col-sm-12 <?php echo $model->hasErrors('description') ? 'has-error' : ''; ?>">
-                <?php echo $form->labelEx($model, 'description'); ?>
-                <?php $this->widget(
-                    $this->module->getVisualEditor(),
-                    [
-                        'model'     => $model,
-                        'attribute' => 'description',
-                    ]
-                ); ?>
-                <?php echo $form->error($model, 'description'); ?>
-            </div>
-        </div>
+<div class='row'>
+    <div class="col-sm-7">
+        <?= $form->textFieldGroup($model, 'url'); ?>
+    </div>
+</div>
 
-		<div class='row'>
-		    <div class="col-sm-12">
-		        <?php echo $form->textFieldGroup($model, 'url'); ?>
-		    </div>
-		</div>
-
-		<div class='row'>
-		    <div class='col-sm-8'>
-		        <?php echo $form->dropDownListGroup(
-		            $model,
-		            'status',
-		            array(
-		                'widgetOptions' => array(
-		                    'data' => $model->getStatusList(),
-		                ),
-		            )
-		        ); ?>
-		    </div>
-
-		</div>
-
+<div class='row'>
+    <div class='col-sm-7'>
+        <?= $form->dropDownListGroup(
+            $model,
+            'status',
+            [
+                'widgetOptions' => [
+                    'data' => $model->getStatusList(),
+                ],
+            ]
+        ); ?>
     </div>
 
 </div>
@@ -113,27 +106,27 @@ $form = $this->beginWidget(
 <?php
 $this->widget(
     'bootstrap.widgets.TbButton',
-    array(
+    [
         'buttonType' => 'submit',
         'context'    => 'primary',
         'label'      => $model->isNewRecord ? Yii::t($aliasModule, 'Add slide and close') : Yii::t(
                 $aliasModule,
                 'Save slide and continue'
             ),
-    )
+    ]
 ); ?>
 
 <?php
 $this->widget(
     'bootstrap.widgets.TbButton',
-    array(
+    [
         'buttonType'  => 'submit',
-        'htmlOptions' => array('name' => 'submit-type', 'value' => 'index'),
+        'htmlOptions' => ['name' => 'submit-type', 'value' => 'index'],
         'label'       => $model->isNewRecord ? Yii::t($aliasModule, 'Add slide and save') : Yii::t(
                 $aliasModule,
                 'Save mage and close'
             ),
-    )
+    ]
 ); ?>
 
 <?php $this->endWidget(); ?>

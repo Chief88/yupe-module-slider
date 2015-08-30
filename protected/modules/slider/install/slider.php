@@ -2,13 +2,13 @@
 /**
  * Файл конфигурации модуля
  **/
-return array(
-    'module'    => array(
+return [
+    'module'    => [
         'class' => 'application.modules.slider.SliderModule',
-    ),
-    'import'    => array(
+    ],
+    'import'    => [
         'application.modules.slider.models.*',
-    ),
-    'component' => array(),
-    'rules'     => array(),
-);
+    ],
+    'component' => [],
+    'rules'     => [],
+];

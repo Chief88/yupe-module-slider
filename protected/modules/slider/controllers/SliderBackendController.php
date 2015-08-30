@@ -63,7 +63,7 @@ class SliderBackendController extends yupe\components\controllers\BackController
                     $this->redirect(
                         (array)Yii::app()->getRequest()->getPost(
                             'submit-type',
-                            array('create')
+                            ['create']
                         )
                     );
                 }
@@ -77,7 +77,7 @@ class SliderBackendController extends yupe\components\controllers\BackController
             }
         }
 
-        $this->render('create', array('model' => $model));
+        $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -105,13 +105,13 @@ class SliderBackendController extends yupe\components\controllers\BackController
                 $this->redirect(
                     (array)Yii::app()->getRequest()->getPost(
                         'submit-type',
-                        array('update', 'id' => $model->id)
+                        ['update', 'id' => $model->id]
                     )
                 );
             }
         }
 
-        $this->render('update', array('model' => $model));
+        $this->render('update', ['model' => $model]);
     }
 
     /**
@@ -162,11 +162,11 @@ class SliderBackendController extends yupe\components\controllers\BackController
         $model->setAttributes(
             Yii::app()->getRequest()->getParam(
                 'Slider',
-                array()
+                []
             )
         );
 
-        $this->render('index', array('model' => $model));
+        $this->render('index', ['model' => $model]);
     }
 
     /**

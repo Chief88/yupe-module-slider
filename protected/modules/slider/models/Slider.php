@@ -1,14 +1,9 @@
 <?php
 
 /**
- * Slider
+ * Slide основная модель для работы с изображениями
  *
- * @author Valek Vergilyush <v.vergilyush@gmail.com>
- * @link http://green-s.pro
- * @copyright 2010-2014 green-s.pro
- * @package yupe.modules.slide.models
- * @since 0.1
- *
+ * @author Sergey Latyskov <serg.latyshkov@gmail.com>
  */
 
 /**
@@ -61,16 +56,16 @@ class Slider extends yupe\models\YModel
      */
     public function rules()
     {
-        return array(
-            array('name, description', 'filter', 'filter' => array(new CHtmlPurifier(), 'purify')),
-            array('name, code', 'required'),
-            array('name, description', 'filter', 'filter' => 'trim'),
-            array('status', 'numerical', 'integerOnly' => true),
-            array('user_id, status', 'length', 'max' => 11),
-            array('name, code', 'length', 'max' => 250),
-            array('code', 'unique'),
-            array('code, id, name, description, creation_date, user_id, status', 'safe', 'on' => 'search'),
-        );
+        return [
+            ['name, description', 'filter', 'filter' => [new CHtmlPurifier(), 'purify']],
+            ['name, code', 'required'],
+            ['name, description', 'filter', 'filter' => 'trim'],
+            ['status', 'numerical', 'integerOnly' => true],
+            ['user_id, status', 'length', 'max' => 11],
+            ['name, code', 'length', 'max' => 250],
+            ['code', 'unique'],
+            ['code, id, name, description, creation_date, user_id, status', 'safe', 'on' => 'search'],
+        ];
     }
 
     public function afterDelete()
@@ -90,11 +85,11 @@ class Slider extends yupe\models\YModel
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array_merge(
-            array(
-                'slides'    => array(self::HAS_MANY, 'Slide', 'slider_id'),
-                'user'     => array(self::BELONGS_TO, 'User', 'user_id'),
-            ),
-			array()
+            [
+                'slides'    => [self::HAS_MANY, 'Slide', 'slider_id'],
+                'user'     => [self::BELONGS_TO, 'User', 'user_id'],
+            ],
+			[]
         );
     }
 
@@ -103,7 +98,7 @@ class Slider extends yupe\models\YModel
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'id'            => Yii::t($this->_aliasModule, 'id'),
             'name'          => Yii::t($this->_aliasModule, 'Name slider'),
             'description'   => Yii::t($this->_aliasModule, 'Description slider'),
@@ -111,7 +106,7 @@ class Slider extends yupe\models\YModel
             'user_id'       => Yii::t($this->_aliasModule, 'Creator'),
             'status'        => Yii::t($this->_aliasModule, 'Status'),
             'code'          => Yii::t($this->_aliasModule, 'Code'),
-        );
+        ];
     }
 
     /**
@@ -134,10 +129,10 @@ class Slider extends yupe\models\YModel
         $criteria->compare('t.status', $this->status);
 
 
-        return new CActiveDataProvider(get_class($this), array(
+        return new CActiveDataProvider(get_class($this), [
         		'criteria' => $criteria,
-        		'sort'     => array('defaultOrder' => 't.id')
-        		));
+        		'sort'     => ['defaultOrder' => 't.id']
+        		]);
     }
 
     public function beforeValidate()
@@ -152,10 +147,10 @@ class Slider extends yupe\models\YModel
 
     public function getStatusList()
     {
-        return array(
+        return [
             self::STATUS_SHOW    => Yii::t($this->_aliasModule, 'show'),
             self::STATUS_HIDE => Yii::t($this->_aliasModule, 'hide')
-        );
+        ];
     }
 
     public function getStatus()

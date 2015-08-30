@@ -1,55 +1,55 @@
 <?php
-$this->breadcrumbs = array(
-    Yii::t($this->aliasModule, 'Slider') => array($this->patchBackend .'index'),
+$this->breadcrumbs = [
+    Yii::t($this->aliasModule, 'Slider') => [$this->patchBackend .'index'],
     Yii::t($this->aliasModule, 'Management'),
-);
+];
 
 $this->pageTitle = Yii::t($this->aliasModule, 'Slider - manage');
 
-$this->menu = array(
-    array(
+$this->menu = [
+    [
         'label' => 'Слайдеры',
-        'items' => array(
-            array(
+        'items' => [
+            [
                 'icon'  => 'fa fa-fw fa-list-alt',
                 'label' => Yii::t($this->aliasModule, 'Slider management'),
-                'url'   => array($this->patchBackend .'index')
-            ),
-            array(
+                'url'   => [$this->patchBackend .'index']
+            ],
+            [
                 'icon'  => 'fa fa-fw fa-plus-square',
                 'label' => Yii::t($this->aliasModule, 'Add slider'),
-                'url'   => array($this->patchBackend .'create')
-            ),
-        )
-    ),
-    array(
+                'url'   => [$this->patchBackend .'create']
+            ],
+        ]
+    ],
+    [
         'label' => 'Слайды',
-        'items' => array(
-            array(
+        'items' => [
+            [
                 'icon' => 'list-alt',
                 'label' => Yii::t($this->aliasModule, 'Slide management'),
-                'url' => array('/slider/slideBackend/index')
-            ),
-        )
-    ),
-);
+                'url' => ['/slider/slideBackend/index']
+            ],
+        ]
+    ],
+];
 ?>
 
 <div class="page-header">
     <h1>
-        <?php echo ucfirst(Yii::t($this->aliasModule, 'Slider')); ?>
-        <small><?php echo Yii::t($this->aliasModule, 'management'); ?></small>
+        <?= ucfirst(Yii::t($this->aliasModule, 'Slider')); ?>
+        <small><?= Yii::t($this->aliasModule, 'management'); ?></small>
     </h1>
 </div>
 
 <?php
 $this->widget(
     'yupe\widgets\CustomGridView',
-    array(
+    [
         'id'           => 'slider-grid',
         'dataProvider' => $model->search(),
         'filter'       => $model,
-        'columns'      => array(
+        'columns'      => [
             [
                 'class'    => 'bootstrap.widgets.TbEditableColumn',
                 'name'     => 'name',
@@ -75,7 +75,7 @@ $this->widget(
                 'filter'   => CHtml::activeTextField($model, 'code', ['class' => 'form-control']),
             ],
             'description',
-            array(
+            [
                     'class'   => 'yupe\widgets\EditableStatusColumn',
                     'name'    => 'status',
                     'url'     => $this->createUrl($this->patchBackend .'inline'),
@@ -85,12 +85,11 @@ $this->widget(
                     Slide::STATUS_HIDE => ['class' => 'label-danger'],
 
                     ],
-            ),
-
-            array(
+            ],
+            [
                 'class' => 'yupe\widgets\CustomButtonColumn',
             		'template'=>'{update}{delete}'
-            ),
-        ),
-    )
+            ],
+        ],
+    ]
 ); ?>

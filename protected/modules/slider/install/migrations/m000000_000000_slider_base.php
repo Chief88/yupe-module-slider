@@ -14,7 +14,7 @@ class m000000_000000_slider_base extends yupe\components\DbMigration
     {
         $this->createTable(
             '{{slide_slide}}',
-            array(
+            [
                 'id'            => 'pk',
                 'name'          => 'varchar(250) NOT NULL',
                 'description'   => 'text',
@@ -25,7 +25,7 @@ class m000000_000000_slider_base extends yupe\components\DbMigration
                 'status'        => "integer NOT NULL DEFAULT '1'",
             	'sort'			=> 	"integer NOT NULL DEFAULT '1'",
                 'slider_id'     => 'int(11) NOT NULL',
-            ),
+            ],
             $this->getOptions()
         );
 
@@ -48,7 +48,7 @@ class m000000_000000_slider_base extends yupe\components\DbMigration
 
         $this->createTable(
             '{{slide_slider}}',
-            array(
+            [
                 'id'            => 'pk',
                 'name'          => 'varchar(250) NOT NULL',
                 'code'          => 'varchar(250) NOT NULL',
@@ -56,7 +56,7 @@ class m000000_000000_slider_base extends yupe\components\DbMigration
                 'creation_date' => 'datetime NOT NULL',
                 'user_id'       => 'integer DEFAULT NULL',
                 'status'        => "integer NOT NULL DEFAULT '1'",
-            ),
+            ],
             $this->getOptions()
         );
 

@@ -1,51 +1,48 @@
 <?php
-
 /**
  * SlideBackendController контроллер для управления изображениями в панели упраления
- **/
+ ***/
 class SlideBackendController extends yupe\components\controllers\BackController
 {
 
     public $aliasModule = 'SliderModule.slider';
     public $patchBackend = '/slider/slideBackend/';
-    
+
     public function accessRules()
     {
-        return array(
-            array('allow', 'roles' => array('admin')),
-            array('allow', 'actions' => array('create'), 'roles' => array('Slider.SlideBackend.Create')),
-            array('allow', 'actions' => array('delete'), 'roles' => array('Slider.SlideBackend.Delete')),
-            array('allow', 'actions' => array('index'), 'roles' => array('Slider.SlideBackend.Index')),
-            array('allow', 'actions' => array('update, inline, sortable'), 'roles' => array('Slider.SlideBackend.Update')),
-            array('deny')
-        );
+        return [
+            ['allow', 'roles' => ['admin']],
+            ['allow', 'actions' => ['create'], 'roles' => ['Slider.SlideBackend.Create']],
+            ['allow', 'actions' => ['delete'], 'roles' => ['Slider.SlideBackend.Delete']],
+            ['allow', 'actions' => ['index'], 'roles' => ['Slider.SlideBackend.Index']],
+            ['allow', 'actions' => ['update, inline, sortable'], 'roles' => ['Slider.SlideBackend.Update']],
+            ['deny']
+        ];
     }
 
     public function actions()
     {
-        return array(
-            'AjaxImageUpload' => array(
+        return [
+            'AjaxImageUpload' => [
                 'class'     => 'yupe\components\actions\YAjaxImageUploadAction',
                 'maxSize'   => $this->module->maxSize,
                 'mimeTypes' => $this->module->mimeTypes,
                 'types'     => $this->module->allowedExtensions
-            ),
-            'AjaxImageChoose' => array(
+            ],
+            'AjaxImageChoose' => [
                 'class' => 'yupe\components\actions\YAjaxImageChooseAction'
-            ),
-        	'inline' => array(
-        		'class'           => 'yupe\components\actions\YInLineEditAction',
-        		'model'           => 'Slide',
-        		'validAttributes' => array('status')
-        	),
+            ],
+            'inline' => [
+                'class'           => 'yupe\components\actions\YInLineEditAction',
+                'model'           => 'Slide',
+                'validAttributes' => ['status']
+            ],
             'sortable' => [
                 'class' => 'yupe\components\actions\SortAction',
                 'model' => 'Slide',
                 'attribute' => 'sort'
             ]
-
-
-        );
+        ];
     }
 
     /**
@@ -53,9 +50,8 @@ class SlideBackendController extends yupe\components\controllers\BackController
      * Если создание прошло успешно - перенаправляет на просмотр.
      *
      * @return void
-     */
-    public function actionCreate()
-    {
+     **/
+    public function actionCreate(){
         $model = new Slide();
 
         if (($data = Yii::app()->getRequest()->getPost('Slide')) !== null) {
@@ -67,9 +63,6 @@ class SlideBackendController extends yupe\components\controllers\BackController
             try {
 
                 if ($model->save()) {
-
-
-
                     $transaction->commit();
 
                     Yii::app()->user->setFlash(
@@ -80,7 +73,7 @@ class SlideBackendController extends yupe\components\controllers\BackController
                     $this->redirect(
                         (array)Yii::app()->getRequest()->getPost(
                             'submit-type',
-                            array('create')
+                            ['create']
                         )
                     );
                 }
@@ -94,13 +87,13 @@ class SlideBackendController extends yupe\components\controllers\BackController
             }
         }
 
-        $this->render('create', array('model' => $model));
+        $this->render('create', ['model' => $model]);
     }
 
     /**
      * Редактирование изображения.
      *
-     * @param integer $id the ID of the model to be updated
+     * @param integer $id the ID of the model to be update
      *
      * @return void
      */
@@ -122,22 +115,23 @@ class SlideBackendController extends yupe\components\controllers\BackController
                 $this->redirect(
                     (array)Yii::app()->getRequest()->getPost(
                         'submit-type',
-                        array('update', 'id' => $model->id)
+                        ['update', 'id' => $model->id]
                     )
                 );
             }
         }
 
-        $this->render('update', array('model' => $model));
+        $this->render('update', ['model' => $model]);
     }
 
     /**
-     * Удаяет модель изображения из базы.
+     * Удаяет модель изображения из базы
      * Если удаление прошло успешно - возвращется в index
      *
      * @param integer $id - идентификатор изображения, который нужно удалить
      *
      * @return void
+     *
      *
      * @throws CHttpException
      */
@@ -154,9 +148,9 @@ class SlideBackendController extends yupe\components\controllers\BackController
             );
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            Yii::app()->getRequest()->getParam('ajax') !== null || $this->redirect(
-                (array)Yii::app()->getRequest()->getPost('returnUrl', 'index')
-            );
+                Yii::app()->getRequest()->getParam('ajax') !== null || $this->redirect(
+                    (array)Yii::app()->getRequest()->getPost('returnUrl', 'index')
+                );
         } else {
             throw new CHttpException(
                 400,
@@ -179,17 +173,16 @@ class SlideBackendController extends yupe\components\controllers\BackController
         $model->setAttributes(
             Yii::app()->getRequest()->getParam(
                 'Slide',
-                array()
+                []
             )
         );
 
-        $this->render('index', array('model' => $model));
+        $this->render('index', ['model' => $model]);
     }
 
     /**
      * Возвращает модель по указанному идентификатору
      * Если модель не будет найдена - возникнет HTTP-исключение.
-     *
      * @param integer $id идентификатор нужной модели
      *
      * @return void

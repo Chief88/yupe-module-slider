@@ -1,65 +1,65 @@
 <?php
-$this->breadcrumbs = array(
-    Yii::t($this->aliasModule, 'Slider') => array($this->patchBackend .'index'),
-    Yii::t($this->aliasModule, 'Slide') => array($this->patchBackend .'index'),
+$this->breadcrumbs = [
+    Yii::t($this->aliasModule, 'Slider') => [$this->patchBackend .'index'],
+    Yii::t($this->aliasModule, 'Slide') => [$this->patchBackend .'index'],
     Yii::t($this->aliasModule, 'Management'),
-);
+];
 
 $this->pageTitle = Yii::t($this->aliasModule, 'Slides - manage');
 
-$this->menu = array(
-    array(
+$this->menu = [
+    [
         'icon'  => 'fa fa-fw fa-list-alt',
         'label' => Yii::t($this->aliasModule, 'Slide management'),
-        'url'   => array($this->patchBackend .'index')
-    ),
-    array(
+        'url'   => [$this->patchBackend .'index']
+    ],
+    [
         'icon'  => 'fa fa-fw fa-plus-square',
         'label' => Yii::t($this->aliasModule, 'Add slide'),
-        'url'   => array($this->patchBackend .'create')
-    ),
-);
+        'url'   => [$this->patchBackend .'create']
+    ],
+];
 
-$this->menu = array(
-    array(
-        'label' => 'Слайды',
-        'items' => array(
-            array(
-                'icon'  => 'fa fa-fw fa-list-alt',
-                'label' => Yii::t($this->aliasModule, 'Slide management'),
-                'url'   => array($this->patchBackend .'index')
-            ),
-            array(
-                'icon'  => 'fa fa-fw fa-plus-square',
-                'label' => Yii::t($this->aliasModule, 'Add slide'),
-                'url'   => array($this->patchBackend .'create')
-            ),
-        )
-    ),
-    array(
+$this->menu = [
+    [
         'label' => 'Слайдры',
-        'items' => array(
-            array(
+        'items' => [
+            [
                 'icon' => 'list-alt',
                 'label' => Yii::t($this->aliasModule, 'Slider management'),
-                'url' => array('/slider/sliderBackend/index')
-            ),
-        )
-    ),
-);
+                'url' => ['/slider/sliderBackend/index']
+            ],
+        ]
+    ],
+    [
+        'label' => 'Слайды',
+        'items' => [
+            [
+                'icon'  => 'fa fa-fw fa-list-alt',
+                'label' => Yii::t($this->aliasModule, 'Slide management'),
+                'url'   => [$this->patchBackend .'index']
+            ],
+            [
+                'icon'  => 'fa fa-fw fa-plus-square',
+                'label' => Yii::t($this->aliasModule, 'Add slide'),
+                'url'   => [$this->patchBackend .'create']
+            ],
+        ]
+    ],
+];
 
 ?>
 <div class="page-header">
     <h1>
-        <?php echo ucfirst(Yii::t($this->aliasModule, 'Slides')); ?>
-        <small><?php echo Yii::t($this->aliasModule, 'management'); ?></small>
+        <?= ucfirst(Yii::t($this->aliasModule, 'Slides')); ?>
+        <small><?= Yii::t($this->aliasModule, 'management'); ?></small>
     </h1>
 </div>
 
 <?php
 $this->widget(
     'yupe\widgets\CustomGridView',
-    array(
+    [
         'id'           => 'slide-grid',
     		'sortableRows'      => true,
     		'sortableAjaxSave'  => true,
@@ -67,25 +67,25 @@ $this->widget(
     		'sortableAction'    => $this->patchBackend .'sortable',
         'dataProvider' => $model->search(),
         'filter'       => $model,
-        'columns'      => array(
-            array(
+        'columns'      => [
+            [
                 'name'   => 'slider_id',
                 'value'  => '$data->slider->name',
                 'filter' => CHtml::activeDropDownList(
                     $model,
                     'slider_id',
                     Slider::model()->getListNameSlider(),
-                    array('class' => 'form-control', 'encode' => false, 'empty' => '')
+                    ['class' => 'form-control', 'encode' => false, 'empty' => '']
                 ),
-            ),
-            array(
+            ],
+            [
                 'name'   => Yii::t($this->aliasModule, 'file'),
                 'type'   => 'raw',
-                'value'  => 'CHtml::image($data->getImageUrl(75, 75), $data->name, array("width" => 75, "height" => 75))',
+                'value'  => 'CHtml::image($data->getImageUrl(155), $data->name)',
                 'filter' => false
-            ),
+            ],
             'name',
-            array(
+            [
                     'class'   => 'yupe\widgets\EditableStatusColumn',
                     'name'    => 'status',
                     'url'     => $this->createUrl($this->patchBackend .'inline'),
@@ -95,11 +95,11 @@ $this->widget(
                     Slide::STATUS_HIDE => ['class' => 'label-danger'],
 
                     ],
-            ),
-            array(
+            ],
+            [
                 'class' => 'yupe\widgets\CustomButtonColumn',
             		'template'=>'{update}{delete}'
-            ),
-        ),
-    )
+            ],
+        ],
+    ]
 ); ?>
