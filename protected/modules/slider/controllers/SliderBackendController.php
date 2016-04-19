@@ -77,7 +77,51 @@ class SliderBackendController extends yupe\components\controllers\BackController
             }
         }
 
-        $this->render('create', ['model' => $model]);
+        $languages = $this->yupe->getLanguagesList();
+
+        //если добавляем перевод
+        $id = (int)Yii::app()->getRequest()->getQuery('id');
+        $lang = Yii::app()->getRequest()->getQuery('lang');
+
+        if (!empty($id) && !empty($lang)) {
+            $slider = Slider::model()->findByPk($id);
+
+            if (null === $slider) {
+                Yii::app()->user->setFlash(
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
+                    Yii::t($this->aliasModule, 'Targeting slider was not found!')
+                );
+                $this->redirect(['create']);
+            }
+
+            if (!array_key_exists($lang, $languages)) {
+                Yii::app()->user->setFlash(
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
+                    Yii::t($this->aliasModule, 'Language was not found!')
+                );
+
+                $this->redirect(['create']);
+            }
+
+            Yii::app()->user->setFlash(
+                yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
+                Yii::t(
+                    $this->aliasModule,
+                    'You are adding translate in to {lang}!',
+                    [
+                        '{lang}' => $languages[$lang]
+                    ]
+                )
+            );
+
+            $model->lang = $lang;
+            $model->name = $slider->name;
+            $model->code = $slider->code;
+        } else {
+            $model->lang = Yii::app()->language;
+        }
+
+        $this->render('create', ['model' => $model, 'languages' => $languages]);
     }
 
     /**
@@ -111,7 +155,7 @@ class SliderBackendController extends yupe\components\controllers\BackController
             }
         }
 
-        $this->render('update', ['model' => $model]);
+        $this->render('update', ['model' => $model, 'languages' => $this->yupe->getLanguagesList()]);
     }
 
     /**

@@ -4,31 +4,44 @@ Yii::import('application.modules.slider.models.*');
 
 class SliderWidget extends yupe\widgets\YWidget
 {
-    public $view = 'slider';
-    public $code;
-    public $params;
+	public $view = 'slider';
+	public $code;
+	public $params;
 
-    public function run()
-    {
+	public function run()
+	{
 
-        $criteria = new CDbCriteria();
-        $criteria->with[] = 'slider';
-        $criteria->condition = 'slider.code = :code AND slider.status = :sliderStatus AND t.status = :slideStatus';
-        $criteria->params = [
-            ':code' => $this->code,
-            ':sliderStatus' => Slider::STATUS_SHOW,
-            ':slideStatus' => Slide::STATUS_SHOW,
-        ];
-        $criteria->order = 't.sort';
+		$criteria = new CDbCriteria();
+		$criteria->condition = 't.code = :code AND t.status = :status AND t.lang = :lang';
+		$criteria->params = [
+			':code' => $this->code,
+			':status' => Slider::STATUS_SHOW,
+			':lang' => Yii::app()->language,
+		];
 
-        $items = Slide::model()->findAll($criteria);
+		$slider = Slider::model()->find($criteria);
 
-        if (count($items) > 0){
-            $this->render($this->view, [
-                'items' => $items,
-                'params' => $this->params,
-            ]);
-        }
+		if(null == $slider){
+			$criteria->params[':lang'] = Yii::app()->controller->yupe->defaultLanguage;
+			$slider = Slider::model()->find($criteria);
+		}
 
-    }
+		if(null != $slider){
+			$criteria = new CDbCriteria();
+			$criteria->condition = 't.slider_id = :sliderId AND t.status = :slideStatus';
+			$criteria->params = [
+				':sliderId' => $slider->id,
+				':slideStatus' => Slide::STATUS_SHOW,
+			];
+			$criteria->order = 't.sort';
+
+			$items = Slide::model()->findAll($criteria);
+
+			$this->render($this->view, [
+				'items' => $items,
+				'slider' => $slider,
+				'params' => $this->params,
+			]);
+		}
+	}
 }
